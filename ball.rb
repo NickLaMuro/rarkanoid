@@ -1,5 +1,6 @@
 class Ball
-  SIZE = 8
+  SIZE = CONFIG.ball.size
+  SPEED = CONFIG.ball.speed.to_f
 
   attr_reader :dx, :dy
 
@@ -8,8 +9,8 @@ class Ball
     @blocks = blocks
     @x = paddle.x
     @y = 440
-    @dx = 2.0
-    @dy = -2.0
+    @dx = SPEED
+    @dy = -1 * SPEED
   end
 
   def x
@@ -119,8 +120,14 @@ class Ball
     y + SIZE/2
   end
 
+  def gosu_color
+    Gosu::Color.const_get CONFIG.ball.color.to_s.upcase
+  rescue NameError
+    Gosu::Color::WHITE
+  end
+
   def draw(window)
-    color = Gosu::Color::WHITE
+    color = gosu_color
 
     window.draw_quad(x1, y1, color, x2, y1, color, x2, y2, color, x1, y2, color)
   end

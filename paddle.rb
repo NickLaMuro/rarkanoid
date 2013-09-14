@@ -1,5 +1,6 @@
 class Paddle
-  WIDTH = 80
+  WIDTH = CONFIG.paddle.width
+  SPEED = CONFIG.paddle.speed
 
   attr_reader :x
 
@@ -9,7 +10,7 @@ class Paddle
 
   def move(direction)
     raise unless [:left, :right].include?(direction)
-    amount = 6
+    amount = SPEED
     amount *= -1  if direction == :left
     @x += amount
     if @x < WIDTH/2
@@ -44,8 +45,14 @@ class Paddle
     Rarkanoid::HEIGHT - 16
   end
 
+  def gosu_color
+    Gosu::Color.const_get CONFIG.paddle.color.to_s.upcase
+  rescue NameError
+    Gosu::Color::GRAY
+  end
+
   def draw(window)
-    color = Gosu::Color::GRAY
+    color = gosu_color
 
     window.draw_quad(x1, y1, color, x2, y1, color, x2, y2, color, x1, y2, color)
   end

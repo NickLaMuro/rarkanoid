@@ -1,20 +1,25 @@
 require 'gosu'
 
+require_relative 'default_config'
+require_relative 'my_config'
+
+CONFIG = MyConfig.new
+
 require_relative 'ball'
 require_relative 'block'
 require_relative 'paddle'
 
 class Rarkanoid < Gosu::Window
-  WIDTH = 640
-  HEIGHT = 480
-  HORIZONTAL_BLOCKS = 16
-  VERTICAL_BLOCKS = 24
+  WIDTH = CONFIG.rarkanoid.width
+  HEIGHT = CONFIG.rarkanoid.height
+  HORIZONTAL_BLOCKS = CONFIG.block.horizontal
+  VERTICAL_BLOCKS = CONFIG.block.vertical
   BLOCK_WIDTH = WIDTH / HORIZONTAL_BLOCKS
   BLOCK_HEIGHT = HEIGHT / VERTICAL_BLOCKS
-  BLOCK_PADDING = 1
+  BLOCK_PADDING = CONFIG.block.padding
 
   def initialize
-    super(640, 480, false)
+    super(WIDTH, HEIGHT, false)
     @state = :playing
 
     @font = Gosu::Font.new(self, Gosu::default_font_name, 80)
