@@ -15,6 +15,7 @@ cd rarkanoid
 ## Running
 
 ```bash
+bundle install
 ruby rarkanoid.rb
 ```
 
