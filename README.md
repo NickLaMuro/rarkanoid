@@ -9,13 +9,13 @@ Open a terminal app like Terminal.app or GTerm and run:
 
 ```bash
 git clone https://github.com/jphenow/rarkanoid.git
-cd pong
+cd rarkanoid
 ```
 
 ## Running
 
 ```bash
-ruby pong.rb
+ruby rarkanoid.rb
 ```
 
 ## Try Customizing!
